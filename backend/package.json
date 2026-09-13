@@ -1,0 +1,36 @@
+{
+  "name": "aes-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Arab Episcopal School website",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "node dist/index.js",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^11.0.3",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
