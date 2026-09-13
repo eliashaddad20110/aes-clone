@@ -80,7 +80,7 @@ export default function AboutPage() {
 
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="https://picsum.photos/seed/aes-building/800/600"
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80"
                 alt="AES building exterior"
                 width={800}
                 height={600}

@@ -5,7 +5,11 @@ import { Users, Mail, MapPin } from "lucide-react";
 import { StaffMember } from "../types";
 import { API_URL } from "../lib/utils";
 import LoadingSpinner from "../components/LoadingSpinner";
-import Image from "next/image";
+
+const getInitials = (name: string) => {
+  const parts = name.split(" ").filter((part) => /^[A-Za-z]/.test(part));
+  return parts.slice(-2).map((part) => part[0].toUpperCase()).join("") || (name[0] ?? "A").toUpperCase();
+};
 
 const demoStaff: StaffMember[] = [
   {
@@ -14,7 +18,7 @@ const demoStaff: StaffMember[] = [
     position_en: "Founder & Director",
     category: "administration",
     bio_en: "Co-founder of the Arab Episcopal School and tireless advocate for inclusive education in northern Jordan.",
-    photo_url: "https://picsum.photos/seed/samir/400/400",
+    photo_url: "",
     email: "director@aeschool.org",
     display_order: 1,
     created_at: "2026-01-01T00:00:00Z",
@@ -25,7 +29,7 @@ const demoStaff: StaffMember[] = [
     position_en: "Founder & Kindergarten Head",
     category: "administration",
     bio_en: "Co-founder passionate about early childhood education and inclusion for blind and low-vision children.",
-    photo_url: "https://picsum.photos/seed/sabah/400/400",
+    photo_url: "",
     email: "kindergarten@aeschool.org",
     display_order: 2,
     created_at: "2026-01-01T00:00:00Z",
@@ -36,7 +40,7 @@ const demoStaff: StaffMember[] = [
     position_en: "Primary School Teacher",
     category: "teachers",
     bio_en: "Experienced educator specializing in adaptive literacy and numeracy for visually impaired students.",
-    photo_url: "https://picsum.photos/seed/khaled/400/400",
+    photo_url: "",
     email: "khaled@aeschool.org",
     display_order: 3,
     created_at: "2026-01-01T00:00:00Z",
@@ -47,7 +51,7 @@ const demoStaff: StaffMember[] = [
     position_en: "Braille Instructor",
     category: "teachers",
     bio_en: "Certified Braille instructor supporting students to read, write, and thrive through tactile literacy.",
-    photo_url: "https://picsum.photos/seed/lina/400/400",
+    photo_url: "",
     email: "lina@aeschool.org",
     display_order: 4,
     created_at: "2026-01-01T00:00:00Z",
@@ -58,7 +62,7 @@ const demoStaff: StaffMember[] = [
     position_en: "Administrative Coordinator",
     category: "staff",
     bio_en: "Keeps the school running smoothly by coordinating operations, events, and family communication.",
-    photo_url: "https://picsum.photos/seed/omar/400/400",
+    photo_url: "",
     email: "omar@aeschool.org",
     display_order: 5,
     created_at: "2026-01-01T00:00:00Z",
@@ -69,7 +73,7 @@ const demoStaff: StaffMember[] = [
     position_en: "School Board Member",
     category: "board",
     bio_en: "Board member bringing expertise in special education policy and community development.",
-    photo_url: "https://picsum.photos/seed/nadia/400/400",
+    photo_url: "",
     email: "nadia@aeschool.org",
     display_order: 6,
     created_at: "2026-01-01T00:00:00Z",
@@ -158,16 +162,11 @@ export default function StaffPage() {
                   key={member.id}
                   className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden group"
                 >
-                  {member.photo_url && (
-                    <div className="relative h-64 overflow-hidden bg-navy-100">
-                      <Image
-                        src={member.photo_url}
-                        alt={member.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                  )}
+                  <div className="h-48 flex items-center justify-center bg-gradient-to-br from-navy-900 via-navy-700 to-primary-600">
+                    <span className="text-5xl font-display font-bold text-white">
+                      {getInitials(member.name)}
+                    </span>
+                  </div>
 
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-navy-900 mb-1">{member.name}</h3>
