@@ -16,7 +16,6 @@ export const metadata: Metadata = {
     url: "https://aeschool.org",
     title: "Arab Episcopal School",
     description: "Integrating blind and low-vision students with sighted students since 2003",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
 };
 

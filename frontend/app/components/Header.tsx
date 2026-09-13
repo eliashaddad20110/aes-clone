@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Menu, X, Globe, Accessibility } from "lucide-react";
 import { useState } from "react";
 import { cn } from "../lib/utils";
@@ -24,14 +23,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0">
-              <div className="h-12 w-12 relative">
-                <Image
-                  src="/logo.png"
-                  alt="Arab Episcopal School Logo"
-                  width={48}
-                  height={48}
-                  priority
-                />
+              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary-600 to-navy-800 flex items-center justify-center shadow-md">
+                <span className="text-white font-display font-bold text-lg">AES</span>
               </div>
             </Link>
             <div className="hidden md:block ml-4">

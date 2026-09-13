@@ -1,6 +1,5 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Users, BookOpen, Lightbulb, DollarSign, FileText } from "lucide-react";
 import Link from "next/link";
 

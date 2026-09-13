@@ -17,7 +17,7 @@ const navigation = [
   { name: "Gallery", href: "/admin/gallery", icon: Image },
   { name: "Contact Submissions", href: "/admin/contact", icon: MessageSquare },
   { name: "Settings", href: "/admin/settings", icon: Settings },
-];n
+];
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();

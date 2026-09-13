@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Share2, Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -38,13 +37,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="h-10 w-10 relative mr-3">
-                <Image
-                  src="/logo.png"
-                  alt="Arab Episcopal School Logo"
-                  width={40}
-                  height={40}
-                />
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary-600 to-navy-700 flex items-center justify-center mr-3 shadow-md">
+                <span className="text-white font-display font-bold text-sm">AES</span>
               </div>
               <div>
                 <h2 className="text-lg font-display font-bold">Arab Episcopal School</h2>

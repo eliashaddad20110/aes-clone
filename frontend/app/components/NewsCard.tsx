@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Calendar, User, Clock } from "lucide-react";
 import { cn } from "../lib/utils";
 import { NewsPost } from "../types";
@@ -69,9 +68,7 @@ export default function NewsCard({ news, language = "en", viewMode = "grid" }: N
         </div>
 
         <h2 className="text-xl font-display font-bold text-navy-900 mb-3 group-hover:text-primary-600 transition-colors">
-          <Link href={`/news/${news.id}`} className="focus:outline-none focus:underline">
             {language === "en" ? news.title_en : news.title_de || news.title_en}
-          </Link>
         </h2>
 
         <p className="text-navy-600 mb-4 line-clamp-3">
@@ -83,15 +80,12 @@ export default function NewsCard({ news, language = "en", viewMode = "grid" }: N
             <User className="h-4 w-4 mr-1" />
             School Administrator
           </div>
-          <Link
-            href={`/news/${news.id}`}
-            className="text-primary-600 font-medium hover:text-primary-700 inline-flex items-center group-hover:translate-x-1 transition-transform"
-          >
+          <span className="text-primary-600 font-medium inline-flex items-center">
             Read more
             <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </Link>
+          </span>
         </div>
       </div>
     </article>

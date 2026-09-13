@@ -80,10 +80,10 @@ export default function AboutPage() {
 
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/about-history.jpg"
+                src="https://picsum.photos/seed/aes-building/800/600"
                 alt="AES building exterior"
-                width={500}
-                height={400}
+                width={800}
+                height={600}
                 className="w-full h-auto"
               />
             </div>

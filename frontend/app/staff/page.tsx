@@ -1,40 +1,106 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Users, Mail, Phone, MapPin } from "lucide-react";
+import { Users, Mail, MapPin } from "lucide-react";
 import { StaffMember } from "../types";
 import { API_URL } from "../lib/utils";
 import LoadingSpinner from "../components/LoadingSpinner";
-import ErrorMessage from "../components/ErrorMessage";
 import Image from "next/image";
 
+const demoStaff: StaffMember[] = [
+  {
+    id: "s1",
+    name: "Rev. Samir Esaid",
+    position_en: "Founder & Director",
+    category: "administration",
+    bio_en: "Co-founder of the Arab Episcopal School and tireless advocate for inclusive education in northern Jordan.",
+    photo_url: "https://picsum.photos/seed/samir/400/400",
+    email: "director@aeschool.org",
+    display_order: 1,
+    created_at: "2026-01-01T00:00:00Z",
+  },
+  {
+    id: "s2",
+    name: "Mrs. Sabah Zurikat",
+    position_en: "Founder & Kindergarten Head",
+    category: "administration",
+    bio_en: "Co-founder passionate about early childhood education and inclusion for blind and low-vision children.",
+    photo_url: "https://picsum.photos/seed/sabah/400/400",
+    email: "kindergarten@aeschool.org",
+    display_order: 2,
+    created_at: "2026-01-01T00:00:00Z",
+  },
+  {
+    id: "s3",
+    name: "Khaled Haddad",
+    position_en: "Primary School Teacher",
+    category: "teachers",
+    bio_en: "Experienced educator specializing in adaptive literacy and numeracy for visually impaired students.",
+    photo_url: "https://picsum.photos/seed/khaled/400/400",
+    email: "khaled@aeschool.org",
+    display_order: 3,
+    created_at: "2026-01-01T00:00:00Z",
+  },
+  {
+    id: "s4",
+    name: "Lina Khoury",
+    position_en: "Braille Instructor",
+    category: "teachers",
+    bio_en: "Certified Braille instructor supporting students to read, write, and thrive through tactile literacy.",
+    photo_url: "https://picsum.photos/seed/lina/400/400",
+    email: "lina@aeschool.org",
+    display_order: 4,
+    created_at: "2026-01-01T00:00:00Z",
+  },
+  {
+    id: "s5",
+    name: "Omar Younes",
+    position_en: "Administrative Coordinator",
+    category: "staff",
+    bio_en: "Keeps the school running smoothly by coordinating operations, events, and family communication.",
+    photo_url: "https://picsum.photos/seed/omar/400/400",
+    email: "omar@aeschool.org",
+    display_order: 5,
+    created_at: "2026-01-01T00:00:00Z",
+  },
+  {
+    id: "s6",
+    name: "Dr. Nadia Shaheen",
+    position_en: "School Board Member",
+    category: "board",
+    bio_en: "Board member bringing expertise in special education policy and community development.",
+    photo_url: "https://picsum.photos/seed/nadia/400/400",
+    email: "nadia@aeschool.org",
+    display_order: 6,
+    created_at: "2026-01-01T00:00:00Z",
+  },
+];
+
 export default function StaffPage() {
-  const [staff, setStaff] = useState<StaffMember[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [staff, setStaff] = useState<StaffMember[]>(demoStaff);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let active = true;
     const fetchStaff = async () => {
       try {
-        setLoading(true);
-        const url = selectedCategory === "all" 
-          ? `${API_URL}/staff` 
-          : `${API_URL}/staff?category=${selectedCategory}`;
-        
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to fetch staff");
-        const data = await response.json();
-        setStaff(data.staff || []);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
+        const response = await fetch(`${API_URL}/staff`);
+        if (active && response.ok) {
+          const data = await response.json();
+          if (data.staff?.length) setStaff(data.staff);
+        }
+      } catch {
+        // keep demo data
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     };
-
     fetchStaff();
-  }, [selectedCategory]);
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const categories = [
     { id: "all", label: "All Staff", icon: Users },
@@ -43,6 +109,11 @@ export default function StaffPage() {
     { id: "staff", label: "Support Staff", icon: Users },
     { id: "board", label: "School Board", icon: Users },
   ];
+
+  const filteredStaff =
+    selectedCategory === "all"
+      ? staff
+      : staff.filter((member) => member.category === selectedCategory);
 
   return (
     <main className="min-h-screen">
@@ -71,26 +142,18 @@ export default function StaffPage() {
             ))}
           </div>
 
-          {error && (
-            <ErrorMessage 
-              message={error} 
-              onRetry={() => setSelectedCategory(selectedCategory)} 
-              onClose={() => setError(null)}
-            />
-          )}
-
           {loading ? (
             <div className="flex justify-center py-12">
               <LoadingSpinner size="lg" />
             </div>
-          ) : staff.length === 0 ? (
+          ) : filteredStaff.length === 0 ? (
             <div className="text-center py-12">
               <Users className="h-12 w-12 text-navy-300 mx-auto mb-4" />
               <p className="text-navy-600 text-lg">No staff members found in this category.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {staff.map((member) => (
+              {filteredStaff.map((member) => (
                 <div
                   key={member.id}
                   className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow overflow-hidden group"
